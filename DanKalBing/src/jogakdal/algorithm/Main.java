@@ -61,6 +61,20 @@ public class Main {
             return (n < 0)? -n : n;
         }
 
+        /*
+         원(호)와 선분이 만나는지 검사
+         직선의 방정식 : X = A + t(B - A)
+         원의 방정식 : (X - C)^2 = R^2
+         ==> (B - A)^2*t^2 + 2(B - A)(A- C)t + (A - C)^2 - R^2 = 0;
+         t = (-b +-SQRT(b^2 - 4ac) / 2a 라고 했을 때  ----- (1)
+         a = (B - A)^2
+         b = 2(B - A)(A - C)
+         c = (A - C)^2 - R^2
+         판별식 d = b^2 - 4ac
+         d < 0 이면 충돌 안함 (d == 0 이면 접함)
+         d > 0 이면 (1) 에 대입하여 t1, t2를 구함
+         0 <= f1 <= 1 또는 0 <= f2 <= 1 이면 선분이 원호와 만남
+        */
         public boolean hasCollision(Line l) {
             int a = square(l.Ex - l.Sx) + square(l.Ey - l.Sy);
             int b = 2*((l.Ex - l.Sx)*(l.Sx - Cx) + (l.Ey - l.Sy)*(l.Sy - Cy));
